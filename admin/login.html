@@ -142,15 +142,13 @@
             },
             success: function(res) {
               // console.log(res);
+              $(".modal-body").text(res.msg);
+              $("#myModal").modal();
               if (res.code == 200) {
                 // alert(res.msg);
-                $(".modal-body").html(res.msg);
-                $("#myModal").modal();
-                window.location.href = "./index.html";
-              } else {
-                // alert(res.msg);
-                $(".modal-body").html(res.msg);
-                $("#myModal").modal();
+                $("#myModal").on("hidden.bs.modal", function(e) {
+                  window.location.href = "./index.html";
+                });
               }
             }
           });
