@@ -37,6 +37,37 @@
       </div>
     </div>
 
+    <!-- //使用bootstrap -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">
+              确定
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       // //使用jQuery来处理,先设置好入口函数
       // $(function() {
@@ -96,9 +127,9 @@
             .trim();
 
           if (userName == "" || userPwd == "") {
-            alert("亲，用户名和密码不能为空哦");
-            // $(".modal-body").html("亲，用户名和密码不能为空哦");
-            // $("#myModal").modal();
+            // alert("亲，用户名和密码不能为空哦");
+            $(".modal-body").text("亲，用户名和密码不能为空哦");
+            $("#myModal").modal();
 
             return;
           }
@@ -112,10 +143,14 @@
             success: function(res) {
               // console.log(res);
               if (res.code == 200) {
-                alert(res.msg);
+                // alert(res.msg);
+                $(".modal-body").html(res.msg);
+                $("#myModal").modal();
                 window.location.href = "./index.html";
               } else {
-                alert(res.msg);
+                // alert(res.msg);
+                $(".modal-body").html(res.msg);
+                $("#myModal").modal();
               }
             }
           });
