@@ -157,8 +157,6 @@
           //获取表单信息
           // 获取form表单 formData只能处理原生的DOM对象
           var form = $("#form")[0];
-          //   console.log(form);
-
           var userData = new FormData(form);
           //发送ajax请求提交数据
           $.post({
@@ -175,14 +173,13 @@
                 // window.location.reload();
                 //在子页面中刷新父页面
                 // parent.window.location.reload();
+
                 $.ajax({
                   type: "get",
                   url: window.BigNew.user_info,
                   success: function(res) {
                     //获取到返回的用户信息，在页面渲染
                     // parent在子页面获取到父页面的元素
-                    // console.log();
-                    // parent.$(".user_info>img").attr("src", res.data.userPic);
                     parent.$(".user_info>img").attr("src", res.data.userPic);
                     parent
                       .$(".user_info>span")
@@ -190,6 +187,7 @@
                     parent
                       .$(".user_center_link>img")
                       .attr("src", res.data.userPic);
+
                     //刷新子页面
                     window.location.reload();
                   }
