@@ -170,28 +170,28 @@
               // console.log(res);
               if (res.code == 200) {
                 //刷新子页面
-                window.location.reload();
+                // window.location.reload();
                 //在子页面中刷新父页面
-                parent.window.location.reload();
-                // $.ajax({
-                //   type: "get",
-                //   url: window.BigNew.user_info,
-                //   success: function(res) {
-                //     //获取到返回的用户信息，在页面渲染
-                //     // parent在子页面获取到父页面的元素
-                //     // console.log();
-                //     // parent.$(".user_info>img").attr("src", res.data.userPic);
-                //     parent.$(".user_info>img").attr("src", res.data.userPic);
-                //     parent
-                //       .$(".user_info>span")
-                //       .html("欢迎&nbsp;&nbsp;" + res.data.nickname);
-                //     parent
-                //       .$(".user_center_link>img")
-                //       .attr("src", res.data.userPic);
-                //     //刷新子页面
-                //     window.location.reload();
-                //   }
-                // });
+                // parent.window.location.reload();
+                $.ajax({
+                  type: "get",
+                  url: window.BigNew.user_info,
+                  success: function(res) {
+                    //获取到返回的用户信息，在页面渲染
+                    // parent在子页面获取到父页面的元素
+                    // console.log();
+                    // parent.$(".user_info>img").attr("src", res.data.userPic);
+                    parent.$(".user_info>img").attr("src", res.data.userPic);
+                    parent
+                      .$(".user_info>span")
+                      .html("欢迎&nbsp;&nbsp;" + res.data.nickname);
+                    parent
+                      .$(".user_center_link>img")
+                      .attr("src", res.data.userPic);
+                    //刷新子页面
+                    window.location.reload();
+                  }
+                });
               }
             }
           });
