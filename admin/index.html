@@ -126,6 +126,28 @@
           //回到登录页面
           window.location.href = "./login.html";
         });
+
+        $("div.level01").on("click", function() {
+          $(this)
+            .addClass("active")
+            .siblings("div")
+            .removeClass("active");
+
+          if ($(this).index() == 1) {
+            $("ul.level02").toggle();
+            $("ul.level02 li:eq(0)>a")[0].click();
+            $(this)
+              .find("b")
+              .toggleClass("rotate0");
+          }
+        });
+        //点击li标签的时候给li标签添加一个样式
+        $("ul.level02.li").on("click", function() {
+          $(this)
+            .addClass("active")
+            .siblings("li")
+            .removeClass("active");
+        });
       });
 
       // 原生的ajax方式来处理
