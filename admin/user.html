@@ -114,26 +114,48 @@
 
   <script src="./libs/http.js"></script>
   <script>
-    $(function(){
-
-        $.get({
-            url: BigNew.user_detail,
-            success: function(res){
-                if(res.code == 200){
-                    for(var key in res.data){
-                        $('input.'+key).val(res.data[key]);
-                    }
-
-                    $('.user_pic').attr('src',res.data.userPic);
-                }
+    $(function() {
+      $.get({
+        url: BigNew.user_detail,
+        success: function(res) {
+          if (res.code == 200) {
+            for (var key in res.data) {
+              // console.log(key);
+              $("input." + key).val(res.data[key]);
             }
-        })
+            $(".user_Pic").attr("src", res.data.userPic);
+          }
+        }
+      });
+      $("#exampleInputFile").on("change", function() {
+        var imgIcon = this.files[0];
+        console.log(this.files);
+        var url = URL.createObjectURL(imgIcon);
+        console.log(url);
 
-        $('#exampleInputFlie').on('change',function(){
-            let imgIcon = this.files[0];
-            let url = URL.createObjectURL(imgIcon);
-            $('.user_pic').attr('src',url);
-        })
-    }
+        $(".user_pic").attr("src", url);
+      });
+    });
+
+    // $(function() {
+    //   $.get({
+    //     url: BigNew.user_detail,
+    //     success: function(res) {
+    //       if (res.code == 200) {
+    //         for (var key in res.data) {
+    //           $("input." + key).val(res.data[key]);
+    //         }
+
+    //         $(".user_pic").attr("src", res.data.userPic);
+    //       }
+    //     }
+    //   });
+
+    //   $("#exampleInputFlie").on("change", function() {
+    //     let imgIcon = this.files[0];
+    //     let url = URL.createObjectURL(imgIcon);
+    //     $(".user_pic").attr("src", url);
+    //   });
+    // });
   </script>
 </html>
