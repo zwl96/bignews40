@@ -84,10 +84,33 @@
       </div>
     </div>
     <script src="./libs/http.js"></script>
+
     <script type="text/html" id="list">
         <option value="">所有分类</option>
       {{each data}}
-      <option>{{$value.name}}</option>
+      <option value='{{$value.id}}'>{{$value.name}}</option>
+      {{/each}}
+    </script>
+
+    <script type="text/html" id="atr-list">
+      {{each data.data}}
+        <tr>
+            <td>{{$value.title}}</td>
+            <td>{{$value.author}}</td>
+            <td>{{$value.category}}</td>
+            <td class="text-center">{{$value.date}}</td>
+            <td class="text-center">{{$value.state}}</td>
+            <td class="text-center">
+              <a href="article_edit.html?id={{$value.id}}" data-id='{{$value.id}}' class="btn btn-default btn-xs"
+                >编辑</a
+              >
+              <a
+                href="javascript:void(0);" data-id='{{$value.id}}'
+                class="btn btn-danger btn-xs delete"
+                >删除</a
+              >
+            </td>
+          </tr>
       {{/each}}
     </script>
     <script>
@@ -95,10 +118,55 @@
         $.get({
           url: BigNew.category_list,
           success: function(res) {
+            // console.log(res);
+
             let htmlStr = template("list", res);
+            // let htmlStr = template("list", res);
             $("#selCategory").html(htmlStr);
           }
         });
+        $("#btnSearch").on("click", function(e) {
+          e.preventDefault();
+          let page = 1;
+          let perpage = 10;
+          $.get({
+            url: BigNew.article_query,
+            data: {
+              type: $("#selCategory").val(),
+              state: $("#selStatus").val(),
+              page: page,
+              perpage: perpage
+            },
+            success: function(res) {
+              //   console.log(res);
+              let htmlStr = template("atr-list", res);
+              $(".table>tbody").html(htmlStr, res);
+            }
+          });
+        });
+        $("#btnSearch").trigger("click");
+
+        // $("#btnSearch").on("click", function(e) {
+        //   // 细节：表单中的按钮会有一个默认提交事件，需要阻止默认行为
+        //   e.preventDefault();
+        //   // 2.2 ajax发送请求（这个请求会多次调用，封装到函数中）
+        //   var page = 1;
+        //   var perpage = 10;
+        //   $.get({
+        //     url: BigNew.article_query,
+        //     data: {
+        //       type: $("#selCategory").val(),
+        //       state: $("#selStatus").val(),
+        //       page: page,
+        //       perpage: perpage
+        //     },
+        //     success: function(res) {
+        //       console.log(res);
+        //     }
+        //   });
+        //   // 2.3 数据响应之后使用模板引擎渲染页面
+        //   // 2.4 页面一加载就请求所有的数据
+        // });
       });
     </script>
   </body>
